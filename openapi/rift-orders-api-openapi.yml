@@ -1,0 +1,159 @@
+openapi: 3.1.0
+info:
+  title: Rift Router Orders API
+  version: v3-beta
+  description: Rift is a decentralized exchange (DEX) aggregator that routes swap orders across 20+ venues and bridges to guarantee best-price execution with no added fees. This Router API exposes market quoting, market order creation, and health/provider status endpoints. Reconstructed faithfully from the published API reference at https://docs.rift.trade; the API is in beta.
+  contact:
+    name: Rift
+    url: https://rift.trade
+  x-apis-json-generated: '2026-07-21'
+  x-apis-json-method: generated
+  x-apis-json-source: https://docs.rift.trade/api
+servers:
+- url: https://router-gateway-v3-production.up.railway.app
+  description: Production router gateway (v3, beta)
+tags:
+- name: Orders
+  description: Market order creation and execution
+paths:
+  /order/market:
+    post:
+      operationId: createMarketOrder
+      summary: Create a market order
+      description: Creates a market order from a previously returned quoteId. Requires a client-supplied idempotencyKey so retries do not create duplicate orders.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict (e.g. idempotency or expired quote)
+        '413':
+          description: Payload too large
+        '500':
+          description: Internal server error
+        '502':
+          description: Bad gateway
+        '503':
+          description: Service unavailable
+        '504':
+          description: Gateway timeout
+components:
+  schemas:
+    CreateOrderRequest:
+      type: object
+      required:
+      - quoteId
+      - fromAddress
+      - toAddress
+      - idempotencyKey
+      - refundAuthorizer
+      properties:
+        quoteId:
+          type: string
+          format: uuid
+          description: The quoteId returned by getMarketQuote.
+        fromAddress:
+          type: string
+          minLength: 1
+          maxLength: 128
+        toAddress:
+          type: string
+          minLength: 1
+          maxLength: 128
+        idempotencyKey:
+          type: string
+          minLength: 16
+          maxLength: 128
+          pattern: ^[A-Za-z0-9._:-]+$
+          description: Client-supplied key that makes order creation idempotent.
+        refundAuthorizer:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 128
+        refundAddress:
+          type: string
+          minLength: 1
+          maxLength: 128
+        integrator:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Optional integrator identifier for attribution.
+        refundMode:
+          type: string
+          enum:
+          - evmSignature
+          - token
+          default: evmSignature
+        amountFormat:
+          type: string
+          enum:
+          - readable
+          - raw
+          default: readable
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+        orderAddress:
+          type: string
+        amountToSend:
+          type: string
+        quoteId:
+          type: string
+        orderType:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        status:
+          type: string
+        expiry:
+          type: string
+          format: date-time
+        estimatedOut:
+          type: string
+        route:
+          type: array
+          items:
+            type: object
+        amountFormat:
+          type: string
+          enum:
+          - readable
+          - raw
+        refundMode:
+          type: string
+          enum:
+          - evmSignature
+          - token
+        refundAuthorizer:
+          type:
+          - string
+          - 'null'
+        refundToken:
+          type:
+          - string
+          - 'null'
+        expectedSwapTimeMs:
+          type: integer
+          minimum: 0

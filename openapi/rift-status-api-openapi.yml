@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Rift Router Orders Status API
+  version: v3-beta
+  description: Rift is a decentralized exchange (DEX) aggregator that routes swap orders across 20+ venues and bridges to guarantee best-price execution with no added fees. This Router API exposes market quoting, market order creation, and health/provider status endpoints. Reconstructed faithfully from the published API reference at https://docs.rift.trade; the API is in beta.
+  contact:
+    name: Rift
+    url: https://rift.trade
+  x-apis-json-generated: '2026-07-21'
+  x-apis-json-method: generated
+  x-apis-json-source: https://docs.rift.trade/api
+servers:
+- url: https://router-gateway-v3-production.up.railway.app
+  description: Production router gateway (v3, beta)
+tags:
+- name: Status
+  description: Service and execution-provider health
+paths:
+  /health:
+    get:
+      operationId: checkRiftStatus
+      summary: Check Rift online status
+      description: Returns the online status of the Rift API. No authentication required.
+      tags:
+      - Status
+      responses:
+        '200':
+          description: Service status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+  /providers:
+    get:
+      operationId: checkProviderStatus
+      summary: Check execution provider online status
+      description: Returns the reachability of each downstream execution provider / venue Rift routes through. No authentication required.
+      tags:
+      - Status
+      responses:
+        '200':
+          description: Provider status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderStatus'
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required:
+      - status
+      - timestamp
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+        timestamp:
+          type: string
+          format: date-time
+      example:
+        status: ok
+        timestamp: '2026-05-04T12:00:00.000Z'
+    ProviderStatus:
+      type: object
+      required:
+      - status
+      - timestamp
+      - dependencies
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - degraded
+        timestamp:
+          type: string
+          format: date-time
+        dependencies:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+                enum:
+                - reachable
+                - unreachable
+              checkedAt:
+                type: string
+                format: date-time
+      example:
+        status: ok
+        timestamp: '2026-05-04T12:00:00.000Z'
+        dependencies:
+        - name: hyperliquid_spot
+          status: reachable
+          checkedAt: '2026-05-04T12:00:00.000Z'
