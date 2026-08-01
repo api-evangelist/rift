@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.rift.trade
+versioning:
+  scheme: host-embedded
+  current: v3
+  detail: The router gateway host embeds the major version (router-gateway-v3-production).
+maturity: beta
+health_endpoints:
+  - openapi/rift-openapi.yml#checkRiftStatus
+  - openapi/rift-openapi.yml#checkProviderStatus
+explorer: https://explorer.rift.trade/
+note: >-
+  The API reference labels the endpoints "beta". Service health is exposed via
+  live GET /health and GET /providers endpoints and a transaction explorer, but
+  no dedicated hosted status page, formal SLA, or written deprecation policy was
+  found at the time of enrichment.
+deprecation:
+  policy: none-published
+status_page: none-published

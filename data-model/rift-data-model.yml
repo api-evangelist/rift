@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/rift-openapi.yml
+entities:
+  - name: Quote
+    id_field: quoteId
+    produced_by: openapi/rift-openapi.yml#getMarketQuote
+    fields: [quoteId, from, to, estimatedOut, expiry, route, expectedSwapTimeMs, amountFormat]
+  - name: Order
+    id_field: orderId
+    produced_by: openapi/rift-openapi.yml#createMarketOrder
+    fields: [orderId, orderAddress, quoteId, status, amountToSend, from, to, route, refundMode, refundAuthorizer]
+  - name: Provider
+    id_field: name
+    produced_by: openapi/rift-openapi.yml#checkProviderStatus
+    fields: [name, status, checkedAt]
+    detail: >-
+      Downstream execution venue / bridge (e.g. across, cctp_fast,
+      cctp_standard, hyperliquid_bridge, hyperliquid_spot, kyberswap).
+relationships:
+  - from: Order
+    to: Quote
+    type: belongs_to
+    via: quoteId
+    detail: An order is created from exactly one quote.
+  - from: Quote
+    to: Provider
+    type: has_many
+    via: route
+    detail: A quote's winning route spans one or more execution providers.

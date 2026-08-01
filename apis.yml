@@ -1,9 +1,28 @@
 aid: rift
 name: Rift
-description: 'Rift is a company surfaced as a portfolio company of paradigm and added to the API Evangelist
-  network as a stub for enrichment. Sector: crypto-defi. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Rift is a decentralized exchange (DEX) aggregator that routes swap orders
+  across 20+ trading venues and cross-chain bridges to guarantee best-price
+  execution with zero added fees. Its Router API (v3, currently in beta) lets
+  developers request a best-price market quote for an asset swap, create a
+  market order against that quote with an idempotency key, and check the online
+  status of both the Rift service and each downstream execution provider
+  (Across, CCTP, Hyperliquid, KyberSwap, and more). Rift is backed by Paradigm,
+  WTG Ventures, Edge Capital, and 20+ angel investors.
 url: https://raw.githubusercontent.com/api-evangelist/rift/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Open access
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.rift.trade/images/logos/rift_logo_new_glow.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -12,16 +31,105 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Crypto Defi
-apis: []
+- DEX Aggregator
+- Cross-Chain
+- Trading
+- Swaps
+- Bridge
+- Best Execution
+apis:
+- aid: rift:rift-orders-api
+  name: Rift Orders API
+  description: Market order creation and execution
+  humanURL: https://docs.rift.trade/api
+  baseURL: https://router-gateway-v3-production.up.railway.app
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/rift-orders-api-openapi.yml
+  - type: APIReference
+    url: https://docs.rift.trade/api
+  - type: Documentation
+    url: https://docs.rift.trade
+- aid: rift:rift-quotes-api
+  name: Rift Quotes API
+  description: Best-price quoting across routing venues
+  humanURL: https://docs.rift.trade/api
+  baseURL: https://router-gateway-v3-production.up.railway.app
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/rift-quotes-api-openapi.yml
+  - type: APIReference
+    url: https://docs.rift.trade/api
+  - type: Documentation
+    url: https://docs.rift.trade
+- aid: rift:rift-status-api
+  name: Rift Status API
+  description: Service and execution-provider health
+  humanURL: https://docs.rift.trade/api
+  baseURL: https://router-gateway-v3-production.up.railway.app
+  tags:
+  - Status
+  properties:
+  - type: OpenAPI
+    url: openapi/rift-status-api-openapi.yml
+  - type: APIReference
+    url: https://docs.rift.trade/api
+  - type: Documentation
+    url: https://docs.rift.trade
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v1
 common:
 - type: Website
   url: https://rift.trade
+- type: DeveloperPortal
+  url: https://docs.rift.trade
+- type: Documentation
+  url: https://docs.rift.trade
+- type: APIReference
+  url: https://docs.rift.trade/api
+- type: GettingStarted
+  url: https://docs.rift.trade/what-is-rift
+- type: X
+  url: https://x.com/RIFTHQ
+- type: OpenAPI
+  url: openapi/rift-openapi.yml
+- type: Authentication
+  url: authentication/rift-authentication.yml
+- type: Conventions
+  url: conventions/rift-conventions.yml
+- type: Idempotency
+  url: conventions/rift-conventions.yml
+- type: ErrorCatalog
+  url: errors/rift-problem-types.yml
+- type: DataModel
+  url: data-model/rift-data-model.yml
+- type: Conformance
+  url: conformance/rift-conformance.yml
+- type: Lifecycle
+  url: lifecycle/rift-lifecycle.yml
+- type: MCPServer
+  url: mcp/rift-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/rift-llms.txt
+- type: Overlay
+  url: overlays/rift-openapi-overlay.yaml
+- type: DomainSecurity
+  url: security/rift-domain-security.yml

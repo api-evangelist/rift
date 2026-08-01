@@ -1,0 +1,264 @@
+openapi: 3.1.0
+info:
+  title: Rift Router API
+  version: v3-beta
+  description: >-
+    Rift is a decentralized exchange (DEX) aggregator that routes swap orders
+    across 20+ venues and bridges to guarantee best-price execution with no
+    added fees. This Router API exposes market quoting, market order creation,
+    and health/provider status endpoints. Reconstructed faithfully from the
+    published API reference at https://docs.rift.trade; the API is in beta.
+  contact:
+    name: Rift
+    url: https://rift.trade
+  x-apis-json-generated: '2026-07-21'
+  x-apis-json-method: generated
+  x-apis-json-source: https://docs.rift.trade/api
+servers:
+  - url: https://router-gateway-v3-production.up.railway.app
+    description: Production router gateway (v3, beta)
+tags:
+  - name: Quotes
+    description: Best-price quoting across routing venues
+  - name: Orders
+    description: Market order creation and execution
+  - name: Status
+    description: Service and execution-provider health
+paths:
+  /quote:
+    post:
+      operationId: getMarketQuote
+      summary: Get a market quote
+      description: >-
+        Returns a best-price market quote for swapping one asset into another,
+        routed across Rift's connected venues. The returned quoteId is used to
+        create a market order.
+      tags: [Quotes]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteRequest'
+      responses:
+        '200':
+          description: Quote generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '400': { description: Invalid request }
+        '401': { description: Unauthorized }
+        '409': { description: Conflict }
+        '413': { description: Payload too large }
+        '500': { description: Internal server error }
+        '502': { description: Bad gateway }
+        '503': { description: Service unavailable }
+        '504': { description: Gateway timeout }
+  /order/market:
+    post:
+      operationId: createMarketOrder
+      summary: Create a market order
+      description: >-
+        Creates a market order from a previously returned quoteId. Requires a
+        client-supplied idempotencyKey so retries do not create duplicate
+        orders.
+      tags: [Orders]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400': { description: Invalid request }
+        '401': { description: Unauthorized }
+        '409': { description: Conflict (e.g. idempotency or expired quote) }
+        '413': { description: Payload too large }
+        '500': { description: Internal server error }
+        '502': { description: Bad gateway }
+        '503': { description: Service unavailable }
+        '504': { description: Gateway timeout }
+  /health:
+    get:
+      operationId: checkRiftStatus
+      summary: Check Rift online status
+      description: Returns the online status of the Rift API. No authentication required.
+      tags: [Status]
+      responses:
+        '200':
+          description: Service status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+  /providers:
+    get:
+      operationId: checkProviderStatus
+      summary: Check execution provider online status
+      description: >-
+        Returns the reachability of each downstream execution provider / venue
+        Rift routes through. No authentication required.
+      tags: [Status]
+      responses:
+        '200':
+          description: Provider status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderStatus'
+components:
+  schemas:
+    QuoteRequest:
+      type: object
+      required: [from, to, fromAmount]
+      properties:
+        from:
+          type: string
+          minLength: 1
+          maxLength: 96
+          description: Source asset identifier, e.g. "Bitcoin.BTC".
+          example: Ethereum.USDC
+        to:
+          type: string
+          minLength: 1
+          maxLength: 96
+          description: Destination asset identifier, e.g. "Ethereum.USDC".
+          example: Bitcoin.BTC
+        fromAmount:
+          type: string
+          minLength: 1
+          maxLength: 96
+          description: Amount of the source asset to swap.
+          example: '100'
+        orderType:
+          type: string
+          enum: [market_order, market]
+          default: market_order
+        amountFormat:
+          type: string
+          enum: [readable, raw]
+          default: readable
+        returnFullRoute:
+          type: boolean
+          default: true
+          description: Include the winning route rows when true.
+    Quote:
+      type: object
+      properties:
+        quoteId: { type: string, description: Unique quote identifier }
+        orderType: { type: string, enum: [market_order] }
+        from: { type: string }
+        to: { type: string }
+        expiry: { type: string, format: date-time }
+        estimatedOut: { type: string, description: Expected output amount }
+        route:
+          type: array
+          items: { type: object }
+          description: Hop-by-hop execution details.
+        amountFormat: { type: string, enum: [readable, raw] }
+        expectedSwapTimeMs: { type: integer, minimum: 0 }
+        quoteCandidates:
+          type: array
+          items: {}
+          description: Debug records returned when requested.
+    CreateOrderRequest:
+      type: object
+      required: [quoteId, fromAddress, toAddress, idempotencyKey, refundAuthorizer]
+      properties:
+        quoteId:
+          type: string
+          format: uuid
+          description: The quoteId returned by getMarketQuote.
+        fromAddress:
+          type: string
+          minLength: 1
+          maxLength: 128
+        toAddress:
+          type: string
+          minLength: 1
+          maxLength: 128
+        idempotencyKey:
+          type: string
+          minLength: 16
+          maxLength: 128
+          pattern: '^[A-Za-z0-9._:-]+$'
+          description: Client-supplied key that makes order creation idempotent.
+        refundAuthorizer:
+          type: [string, 'null']
+          minLength: 1
+          maxLength: 128
+        refundAddress:
+          type: string
+          minLength: 1
+          maxLength: 128
+        integrator:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Optional integrator identifier for attribution.
+        refundMode:
+          type: string
+          enum: [evmSignature, token]
+          default: evmSignature
+        amountFormat:
+          type: string
+          enum: [readable, raw]
+          default: readable
+    Order:
+      type: object
+      properties:
+        orderId: { type: string }
+        orderAddress: { type: string }
+        amountToSend: { type: string }
+        quoteId: { type: string }
+        orderType: { type: string }
+        from: { type: string }
+        to: { type: string }
+        status: { type: string }
+        expiry: { type: string, format: date-time }
+        estimatedOut: { type: string }
+        route:
+          type: array
+          items: { type: object }
+        amountFormat: { type: string, enum: [readable, raw] }
+        refundMode: { type: string, enum: [evmSignature, token] }
+        refundAuthorizer: { type: [string, 'null'] }
+        refundToken: { type: [string, 'null'] }
+        expectedSwapTimeMs: { type: integer, minimum: 0 }
+    HealthStatus:
+      type: object
+      required: [status, timestamp]
+      properties:
+        status: { type: string, enum: [ok] }
+        timestamp: { type: string, format: date-time }
+      example:
+        status: ok
+        timestamp: '2026-05-04T12:00:00.000Z'
+    ProviderStatus:
+      type: object
+      required: [status, timestamp, dependencies]
+      properties:
+        status: { type: string, enum: [ok, degraded] }
+        timestamp: { type: string, format: date-time }
+        dependencies:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              status: { type: string, enum: [reachable, unreachable] }
+              checkedAt: { type: string, format: date-time }
+      example:
+        status: ok
+        timestamp: '2026-05-04T12:00:00.000Z'
+        dependencies:
+          - name: hyperliquid_spot
+            status: reachable
+            checkedAt: '2026-05-04T12:00:00.000Z'

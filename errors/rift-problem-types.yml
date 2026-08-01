@@ -1,0 +1,57 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/rift-openapi.yml
+format: http-status
+note: >-
+  Rift's API reference documents HTTP status codes per operation but does not
+  publish an application/problem+json (RFC 9457) error envelope or a named
+  error-code registry. These entries are derived from the documented response
+  codes on the quote and order operations.
+problems:
+  - status: 400
+    title: Invalid request
+    remediation: Validate required fields, asset identifiers, and amount formatting.
+    source_operations:
+      - openapi/rift-openapi.yml#getMarketQuote
+      - openapi/rift-openapi.yml#createMarketOrder
+  - status: 401
+    title: Unauthorized
+    remediation: Beta access may be gated; confirm access with Rift.
+    source_operations:
+      - openapi/rift-openapi.yml#getMarketQuote
+      - openapi/rift-openapi.yml#createMarketOrder
+  - status: 409
+    title: Conflict
+    remediation: >-
+      Order conflicts typically indicate an expired quote or a reused
+      idempotencyKey; re-quote or use a fresh idempotencyKey.
+    source_operations:
+      - openapi/rift-openapi.yml#getMarketQuote
+      - openapi/rift-openapi.yml#createMarketOrder
+  - status: 413
+    title: Payload too large
+    remediation: Reduce request body size.
+    source_operations:
+      - openapi/rift-openapi.yml#getMarketQuote
+      - openapi/rift-openapi.yml#createMarketOrder
+  - status: 500
+    title: Internal server error
+    source_operations:
+      - openapi/rift-openapi.yml#getMarketQuote
+      - openapi/rift-openapi.yml#createMarketOrder
+  - status: 502
+    title: Bad gateway
+    source_operations:
+      - openapi/rift-openapi.yml#getMarketQuote
+      - openapi/rift-openapi.yml#createMarketOrder
+  - status: 503
+    title: Service unavailable
+    remediation: Poll GET /health and GET /providers before retrying.
+    source_operations:
+      - openapi/rift-openapi.yml#getMarketQuote
+      - openapi/rift-openapi.yml#createMarketOrder
+  - status: 504
+    title: Gateway timeout
+    source_operations:
+      - openapi/rift-openapi.yml#getMarketQuote
+      - openapi/rift-openapi.yml#createMarketOrder

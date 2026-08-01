@@ -1,0 +1,27 @@
+# Rift
+
+> Rift is a decentralized exchange (DEX) aggregator that routes swap orders across 20+ venues and bridges to guarantee best-price execution with no added fees. The Router API (v3, beta) provides market quoting, market order creation, and service/provider health.
+
+## APIs
+- [Rift Router API (OpenAPI)](https://raw.githubusercontent.com/api-evangelist/rift/refs/heads/main/openapi/rift-openapi.yml): 4 operations — quote, order, health, providers. Base URL https://router-gateway-v3-production.up.railway.app
+
+## Operations
+- getMarketQuote — POST /quote — best-price quote for an asset swap
+- createMarketOrder — POST /order/market — create an order from a quoteId (requires idempotencyKey)
+- checkRiftStatus — GET /health — API online status
+- checkProviderStatus — GET /providers — execution-provider reachability
+
+## Docs
+- [API Reference](https://docs.rift.trade/api)
+- [What is Rift?](https://docs.rift.trade/what-is-rift)
+- [Onchain Orchestration](https://docs.rift.trade/onchain-orchestration)
+- [Use Cases](https://docs.rift.trade/use-cases)
+- [Security Model](https://docs.rift.trade/security-model)
+- [FAQ](https://docs.rift.trade/faq)
+- [Transaction Explorer](https://explorer.rift.trade/)
+
+## Conventions
+- Two-step flow: quote (POST /quote) then order (POST /order/market).
+- Idempotency: POST /order/market requires a client-supplied idempotencyKey (16-128 chars, ^[A-Za-z0-9._:-]+$).
+- Assets are addressed as Chain.Symbol (e.g. Bitcoin.BTC, Ethereum.USDC).
+- amountFormat: readable | raw (default readable).

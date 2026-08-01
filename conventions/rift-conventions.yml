@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.rift.trade/api
+note: >-
+  Cross-cutting request/response semantics for the Rift Router API, captured
+  from the published API reference and the reconstructed OpenAPI.
+authentication:
+  style: none-documented
+  detail: >-
+    The public beta endpoints (/quote, /order/market, /health, /providers)
+    document no authentication header, though a 401 response is defined on the
+    quote/order operations, implying access may be gated during beta.
+idempotency:
+  supported: true
+  mechanism: request-body-field
+  field: idempotencyKey
+  applies_to:
+    - openapi/rift-openapi.yml#createMarketOrder
+  constraints:
+    min_length: 16
+    max_length: 128
+    pattern: '^[A-Za-z0-9._:-]+$'
+  detail: >-
+    Order creation requires a client-supplied idempotencyKey so that retried
+    POST /order/market calls do not create duplicate orders.
+quote_order_flow:
+  detail: >-
+    Two-step flow: POST /quote returns a quoteId with an expiry; POST
+    /order/market consumes that quoteId. Quotes expire (see the expiry field)
+    and an expired quote yields a 409.
+amount_format:
+  field: amountFormat
+  values: [readable, raw]
+  default: readable
+  detail: Controls whether amounts are human-readable or raw base units.
+asset_identifiers:
+  format: 'Chain.Symbol'
+  examples: [Bitcoin.BTC, Ethereum.USDC]
+  detail: Assets are addressed as a chain-qualified symbol string.
+attribution:
+  field: integrator
+  detail: Optional integrator identifier for partner attribution on orders.
+versioning:
+  scheme: host-embedded
+  current: v3
+  detail: The router gateway host embeds the major version (router-gateway-v3).
+error_envelope:
+  format: http-status
+  detail: >-
+    Errors are signaled via HTTP status (400/401/409/413/5xx). No RFC 9457
+    problem+json envelope is documented.
+cross_links:
+  errors: errors/rift-problem-types.yml
+  authentication: authentication/rift-authentication.yml
+  lifecycle: lifecycle/rift-lifecycle.yml

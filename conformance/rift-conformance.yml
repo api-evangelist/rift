@@ -1,0 +1,19 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/rift-openapi.yml
+standards:
+  - id: oauth2
+    conforms: false
+  - id: openid-connect
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors are signaled by HTTP status only; no application/problem+json.
+  - id: idempotency
+    conforms: true
+    evidence: >-
+      POST /order/market requires a client-supplied idempotencyKey
+      (16-128 chars) to make order creation safe to retry.
+  - id: openapi-3
+    conforms: true
+    evidence: API reconstructed as OpenAPI 3.1.0 from the published reference.

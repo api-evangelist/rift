@@ -1,0 +1,13 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.rift.trade/api
+summary:
+  types: []
+  detail: >-
+    Rift's beta Router API reference documents no authentication scheme on any
+    of its four endpoints (/quote, /order/market, /health, /providers). The
+    /health and /providers endpoints are explicitly stated to require no
+    authentication and respond publicly. The quote and order operations define
+    a 401 response, so access may be gated during beta, but no API key, bearer,
+    or OAuth mechanism is published.
+schemes: []

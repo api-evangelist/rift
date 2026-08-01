@@ -1,0 +1,18 @@
+{
+  "provider": "rift",
+  "sources": [
+    "rift-orders-api-openapi.yml",
+    "rift-quotes-api-openapi.yml",
+    "rift-status-api-openapi.yml"
+  ],
+  "outputs": [
+    "rift-orders-api-openapi.yml",
+    "rift-quotes-api-openapi.yml",
+    "rift-status-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

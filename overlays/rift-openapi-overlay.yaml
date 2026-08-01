@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Rift Router API
+  version: 1.0.0
+extends: openapi/rift-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-21'
+      x-apievangelist-idempotency: >-
+        Order creation is idempotent via the required idempotencyKey body field.
+      x-apievangelist-maturity: beta
+  - target: $.paths['/order/market'].post
+    update:
+      x-idempotent: true
+      x-idempotency-field: idempotencyKey

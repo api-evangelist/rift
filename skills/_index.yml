@@ -1,0 +1,7 @@
+generated: '2026-07-21'
+method: generated
+skills:
+  - file: rift-swap.md
+    name: Swap assets with Rift
+    api: openapi/rift-openapi.yml
+    operations: [getMarketQuote, createMarketOrder, checkRiftStatus, checkProviderStatus]
