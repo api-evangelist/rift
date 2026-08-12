@@ -108,7 +108,7 @@ common:
 - type: X
   url: https://x.com/RIFTHQ
 - type: OpenAPI
-  url: openapi/rift-openapi.yml
+  url: openapi/_original/rift-openapi.yml
 - type: Authentication
   url: authentication/rift-authentication.yml
 - type: Conventions
