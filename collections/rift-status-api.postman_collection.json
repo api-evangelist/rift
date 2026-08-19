@@ -1,0 +1,172 @@
+{
+  "item": [
+    {
+      "id": "2596aa84-dc88-48df-904f-d38f57a4f37b",
+      "name": "Status",
+      "description": {
+        "content": "Service and execution-provider health",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da0d0395-6318-4abe-949e-f9a2121de78c",
+          "name": "Check Rift online status",
+          "request": {
+            "name": "Check Rift online status",
+            "description": {
+              "content": "Returns the online status of the Rift API. No authentication required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85dc4ec0-8cff-4cb6-9d07-a8a79124723f",
+              "name": "Service status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\",\n  \"timestamp\": \"2026-05-04T12:00:00.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c76607ab-ea3a-42b6-9a11-8bbe7528bbb2",
+          "name": "Check execution provider online status",
+          "request": {
+            "name": "Check execution provider online status",
+            "description": {
+              "content": "Returns the reachability of each downstream execution provider / venue Rift routes through. No authentication required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77b18f8a-3802-437d-8440-296319bae759",
+              "name": "Provider status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\",\n  \"timestamp\": \"2026-05-04T12:00:00.000Z\",\n  \"dependencies\": [\n    {\n      \"name\": \"hyperliquid_spot\",\n      \"status\": \"reachable\",\n      \"checkedAt\": \"2026-05-04T12:00:00.000Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://router-gateway-v3-production.up.railway.app",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2c96613a-a625-4ef9-bbaf-bcc9f7d56eb3",
+    "name": "Rift Router Orders Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Rift is a decentralized exchange (DEX) aggregator that routes swap orders across 20+ venues and bridges to guarantee best-price execution with no added fees. This Router API exposes market quoting, market order creation, and health/provider status endpoints. Reconstructed faithfully from the published API reference at https://docs.rift.trade; the API is in beta.\n\nContact Support:\n Name: Rift",
+      "type": "text/plain"
+    }
+  }
+}

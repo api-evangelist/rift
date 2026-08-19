@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rift Router Orders API",
+    "version": "v3-beta"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a market order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://router-gateway-v3-production.up.railway.app/order/market",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a market order from a previously returned quoteId. Requires a client-supplied idempotencyKey so retries do not create duplicate orders."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -2,22 +2,27 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/rift-openapi.yml
-note: >-
-  No official hosted/remote MCP server was found for Rift. This is a candidate
-  tool list derived one-to-one from the documented Router API operations.
+note: No official hosted/remote MCP server was found for Rift. This is a candidate tool list derived one-to-one
+  from the documented Router API operations.
 server:
   name: rift
   transport: http
 tools:
-  - name: get_market_quote
-    description: Get a best-price market quote for swapping one asset into another.
-    source_operation: openapi/rift-openapi.yml#getMarketQuote
-  - name: create_market_order
-    description: Create a market order from a quoteId (requires an idempotencyKey).
-    source_operation: openapi/rift-openapi.yml#createMarketOrder
-  - name: check_rift_status
-    description: Check the online status of the Rift API.
-    source_operation: openapi/rift-openapi.yml#checkRiftStatus
-  - name: check_provider_status
-    description: Check the reachability of Rift's downstream execution providers.
-    source_operation: openapi/rift-openapi.yml#checkProviderStatus
+- name: get_market_quote
+  description: Get a best-price market quote for swapping one asset into another.
+  source_operation: openapi/rift-openapi.yml#getMarketQuote
+- name: create_market_order
+  description: Create a market order from a quoteId (requires an idempotencyKey).
+  source_operation: openapi/rift-openapi.yml#createMarketOrder
+- name: check_rift_status
+  description: Check the online status of the Rift API.
+  source_operation: openapi/rift-openapi.yml#checkRiftStatus
+- name: check_provider_status
+  description: Check the reachability of Rift's downstream execution providers.
+  source_operation: openapi/rift-openapi.yml#checkProviderStatus
+deployment:
+  mode: none
+  verified: derived
+  tools: 4
+  checked: '2026-08-12'
+  source: catalog MCP census

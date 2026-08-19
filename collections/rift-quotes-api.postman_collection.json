@@ -1,0 +1,419 @@
+{
+  "item": [
+    {
+      "id": "add8a94b-ca15-4673-b211-97c5e8149f40",
+      "name": "Quotes",
+      "description": {
+        "content": "Best-price quoting across routing venues",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d765251a-caa2-433a-a25e-d893515648d7",
+          "name": "Get a market quote",
+          "request": {
+            "name": "Get a market quote",
+            "description": {
+              "content": "Returns a best-price market quote for swapping one asset into another, routed across Rift's connected venues. The returned quoteId is used to create a market order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"fromAmount\": \"<string>\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b0d20189-0c33-41f3-95b4-1bc3f82f2277",
+              "name": "Quote generated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"Ethereum.USDC\",\n  \"to\": \"Bitcoin.BTC\",\n  \"fromAmount\": \"100\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quoteId\": \"string\",\n  \"orderType\": \"market_order\",\n  \"from\": \"string\",\n  \"to\": \"string\",\n  \"expiry\": \"1955-01-11T20:05:43.688Z\",\n  \"estimatedOut\": \"string\",\n  \"amountFormat\": \"raw\",\n  \"expectedSwapTimeMs\": 6248\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee18214c-19cb-49ca-8eaa-52bba24350a9",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"Ethereum.USDC\",\n  \"to\": \"Bitcoin.BTC\",\n  \"fromAmount\": \"100\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24e69c14-511c-46b7-9cae-3bdfd8aa2536",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"Ethereum.USDC\",\n  \"to\": \"Bitcoin.BTC\",\n  \"fromAmount\": \"100\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "204a7733-6bf0-4724-8398-557347a44b93",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"Ethereum.USDC\",\n  \"to\": \"Bitcoin.BTC\",\n  \"fromAmount\": \"100\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "968753b7-b835-40fe-b64b-cb435901a069",
+              "name": "Payload too large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"Ethereum.USDC\",\n  \"to\": \"Bitcoin.BTC\",\n  \"fromAmount\": \"100\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "312c7bc6-4293-484e-9921-e52b296cb341",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"Ethereum.USDC\",\n  \"to\": \"Bitcoin.BTC\",\n  \"fromAmount\": \"100\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "444dc917-d61a-4614-a644-fde071e4295e",
+              "name": "Bad gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"Ethereum.USDC\",\n  \"to\": \"Bitcoin.BTC\",\n  \"fromAmount\": \"100\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1aba5f3f-d191-4f5d-8797-09f907042f57",
+              "name": "Service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"Ethereum.USDC\",\n  \"to\": \"Bitcoin.BTC\",\n  \"fromAmount\": \"100\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ad4d9651-1dd9-4b56-813a-6a3eb0180210",
+              "name": "Gateway timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"Ethereum.USDC\",\n  \"to\": \"Bitcoin.BTC\",\n  \"fromAmount\": \"100\",\n  \"orderType\": \"market_order\",\n  \"amountFormat\": \"readable\",\n  \"returnFullRoute\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://router-gateway-v3-production.up.railway.app",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9c9794f7-1a2c-403c-90d9-14904a02fe6e",
+    "name": "Rift Router Orders Quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Rift is a decentralized exchange (DEX) aggregator that routes swap orders across 20+ venues and bridges to guarantee best-price execution with no added fees. This Router API exposes market quoting, market order creation, and health/provider status endpoints. Reconstructed faithfully from the published API reference at https://docs.rift.trade; the API is in beta.\n\nContact Support:\n Name: Rift",
+      "type": "text/plain"
+    }
+  }
+}

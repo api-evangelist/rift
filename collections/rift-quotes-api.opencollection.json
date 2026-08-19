@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rift Router Orders Quotes API",
+    "version": "v3-beta"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a market quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://router-gateway-v3-production.up.railway.app/quote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a best-price market quote for swapping one asset into another, routed across Rift's connected venues. The returned quoteId is used to create a market order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

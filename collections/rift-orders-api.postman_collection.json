@@ -1,0 +1,429 @@
+{
+  "item": [
+    {
+      "id": "8c38d5e3-aa05-49e7-8c69-821d09ba504e",
+      "name": "Orders",
+      "description": {
+        "content": "Market order creation and execution",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3de9d943-1112-4b5c-bbf4-cfa5c0be077a",
+          "name": "Create a market order",
+          "request": {
+            "name": "Create a market order",
+            "description": {
+              "content": "Creates a market order from a previously returned quoteId. Requires a client-supplied idempotencyKey so retries do not create duplicate orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order",
+                "market"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ed1782d-94d5-487e-bebb-cf877e9aac35",
+              "name": "Order created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "market"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"string\",\n  \"orderAddress\": \"string\",\n  \"amountToSend\": \"string\",\n  \"quoteId\": \"string\",\n  \"orderType\": \"string\",\n  \"from\": \"string\",\n  \"to\": \"string\",\n  \"status\": \"string\",\n  \"expiry\": \"1969-10-12T12:45:22.644Z\",\n  \"estimatedOut\": \"string\",\n  \"amountFormat\": \"raw\",\n  \"refundMode\": \"token\",\n  \"refundAuthorizer\": \"string\",\n  \"refundToken\": \"string\",\n  \"expectedSwapTimeMs\": 3679\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "099af56d-2ed8-4230-be91-887b2aafb4fe",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "market"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "63fa4d08-00a7-4262-a09a-a293dd08f56e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "market"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ebd080f-cb95-4ec9-b3c1-4ff08bf7d08e",
+              "name": "Conflict (e.g. idempotency or expired quote)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "market"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7f4b1541-4620-411e-a135-dbf29798ae53",
+              "name": "Payload too large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "market"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "484a4043-4fe1-44c7-b922-9befcdde861e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "market"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a28d7426-962c-4743-8d6a-4e804d1f1332",
+              "name": "Bad gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "market"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c40e19fb-39b4-4aa1-bebf-5719434a078f",
+              "name": "Service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "market"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2e0440c1-0a40-4c4b-84b8-412af9d5d9d7",
+              "name": "Gateway timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "market"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"<uuid>\",\n  \"fromAddress\": \"<string>\",\n  \"toAddress\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"refundAuthorizer\": \"<string,null>\",\n  \"refundAddress\": \"<string>\",\n  \"integrator\": \"<string>\",\n  \"refundMode\": \"evmSignature\",\n  \"amountFormat\": \"readable\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://router-gateway-v3-production.up.railway.app",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e3516e63-5d1f-4386-8b38-f0fa22cd2965",
+    "name": "Rift Router Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Rift is a decentralized exchange (DEX) aggregator that routes swap orders across 20+ venues and bridges to guarantee best-price execution with no added fees. This Router API exposes market quoting, market order creation, and health/provider status endpoints. Reconstructed faithfully from the published API reference at https://docs.rift.trade; the API is in beta.\n\nContact Support:\n Name: Rift",
+      "type": "text/plain"
+    }
+  }
+}

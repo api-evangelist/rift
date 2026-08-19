@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rift Router Orders Status API",
+    "version": "v3-beta"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Rift online status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://router-gateway-v3-production.up.railway.app/health"
+          },
+          "docs": "Returns the online status of the Rift API. No authentication required."
+        },
+        {
+          "info": {
+            "name": "Check execution provider online status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://router-gateway-v3-production.up.railway.app/providers"
+          },
+          "docs": "Returns the reachability of each downstream execution provider / venue Rift routes through. No authentication required."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
