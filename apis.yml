@@ -48,6 +48,8 @@ apis:
   humanURL: https://docs.rift.trade/api
   baseURL: https://router-gateway-v3-production.up.railway.app
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
