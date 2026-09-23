@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Rift Router Orders Quotes API
+  title: Rift Router Quotes API
   version: v3-beta
   description: Rift is a decentralized exchange (DEX) aggregator that routes swap orders across 20+ venues and bridges to guarantee best-price execution with no added fees. This Router API exposes market quoting, market order creation, and health/provider status endpoints. Reconstructed faithfully from the published API reference at https://docs.rift.trade; the API is in beta.
   contact:

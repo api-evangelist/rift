@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Rift Router Orders Status API
+  title: Rift Router Status API
   version: v3-beta
   description: Rift is a decentralized exchange (DEX) aggregator that routes swap orders across 20+ venues and bridges to guarantee best-price execution with no added fees. This Router API exposes market quoting, market order creation, and health/provider status endpoints. Reconstructed faithfully from the published API reference at https://docs.rift.trade; the API is in beta.
   contact:
@@ -46,22 +46,6 @@ paths:
                 $ref: '#/components/schemas/ProviderStatus'
 components:
   schemas:
-    HealthStatus:
-      type: object
-      required:
-      - status
-      - timestamp
-      properties:
-        status:
-          type: string
-          enum:
-          - ok
-        timestamp:
-          type: string
-          format: date-time
-      example:
-        status: ok
-        timestamp: '2026-05-04T12:00:00.000Z'
     ProviderStatus:
       type: object
       required:
@@ -99,3 +83,19 @@ components:
         - name: hyperliquid_spot
           status: reachable
           checkedAt: '2026-05-04T12:00:00.000Z'
+    HealthStatus:
+      type: object
+      required:
+      - status
+      - timestamp
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+        timestamp:
+          type: string
+          format: date-time
+      example:
+        status: ok
+        timestamp: '2026-05-04T12:00:00.000Z'

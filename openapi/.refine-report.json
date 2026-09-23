@@ -1,9 +1,7 @@
 {
   "provider": "rift",
   "sources": [
-    "rift-orders-api-openapi.yml",
-    "rift-quotes-api-openapi.yml",
-    "rift-status-api-openapi.yml"
+    "_original/rift-openapi.yml"
   ],
   "outputs": [
     "rift-orders-api-openapi.yml",
@@ -13,6 +11,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "rift-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "rift-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rift-quotes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rift-status-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
