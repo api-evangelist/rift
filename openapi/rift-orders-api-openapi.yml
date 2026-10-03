@@ -54,6 +54,55 @@ paths:
           description: Gateway timeout
 components:
   schemas:
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+        orderAddress:
+          type: string
+        amountToSend:
+          type: string
+        quoteId:
+          type: string
+        orderType:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        status:
+          type: string
+        expiry:
+          type: string
+          format: date-time
+        estimatedOut:
+          type: string
+        route:
+          type: array
+          items:
+            type: object
+        amountFormat:
+          type: string
+          enum:
+          - readable
+          - raw
+        refundMode:
+          type: string
+          enum:
+          - evmSignature
+          - token
+        refundAuthorizer:
+          type:
+          - string
+          - 'null'
+        refundToken:
+          type:
+          - string
+          - 'null'
+        expectedSwapTimeMs:
+          type: integer
+          minimum: 0
     CreateOrderRequest:
       type: object
       required:
@@ -108,52 +157,3 @@ components:
           - readable
           - raw
           default: readable
-    Order:
-      type: object
-      properties:
-        orderId:
-          type: string
-        orderAddress:
-          type: string
-        amountToSend:
-          type: string
-        quoteId:
-          type: string
-        orderType:
-          type: string
-        from:
-          type: string
-        to:
-          type: string
-        status:
-          type: string
-        expiry:
-          type: string
-          format: date-time
-        estimatedOut:
-          type: string
-        route:
-          type: array
-          items:
-            type: object
-        amountFormat:
-          type: string
-          enum:
-          - readable
-          - raw
-        refundMode:
-          type: string
-          enum:
-          - evmSignature
-          - token
-        refundAuthorizer:
-          type:
-          - string
-          - 'null'
-        refundToken:
-          type:
-          - string
-          - 'null'
-        expectedSwapTimeMs:
-          type: integer
-          minimum: 0
