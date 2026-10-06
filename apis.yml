@@ -42,7 +42,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-10-06'
 tags:
 - Company
 - Crypto Defi
@@ -117,6 +117,8 @@ x-enrichment:
   artifacts_added: 13
   pass: local-v1
 common:
+- url: https://www.rift.trade/articles
+  type: Blog
 - type: Website
   url: https://rift.trade
 - type: DeveloperPortal
