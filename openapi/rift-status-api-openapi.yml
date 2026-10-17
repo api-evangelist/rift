@@ -46,22 +46,6 @@ paths:
                 $ref: '#/components/schemas/ProviderStatus'
 components:
   schemas:
-    HealthStatus:
-      type: object
-      required:
-      - status
-      - timestamp
-      properties:
-        status:
-          type: string
-          enum:
-          - ok
-        timestamp:
-          type: string
-          format: date-time
-      example:
-        status: ok
-        timestamp: '2026-05-04T12:00:00.000Z'
     ProviderStatus:
       type: object
       required:
@@ -99,3 +83,19 @@ components:
         - name: hyperliquid_spot
           status: reachable
           checkedAt: '2026-05-04T12:00:00.000Z'
+    HealthStatus:
+      type: object
+      required:
+      - status
+      - timestamp
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+        timestamp:
+          type: string
+          format: date-time
+      example:
+        status: ok
+        timestamp: '2026-05-04T12:00:00.000Z'

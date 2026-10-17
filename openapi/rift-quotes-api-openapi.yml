@@ -54,6 +54,43 @@ paths:
           description: Gateway timeout
 components:
   schemas:
+    Quote:
+      type: object
+      properties:
+        quoteId:
+          type: string
+          description: Unique quote identifier
+        orderType:
+          type: string
+          enum:
+          - market_order
+        from:
+          type: string
+        to:
+          type: string
+        expiry:
+          type: string
+          format: date-time
+        estimatedOut:
+          type: string
+          description: Expected output amount
+        route:
+          type: array
+          items:
+            type: object
+          description: Hop-by-hop execution details.
+        amountFormat:
+          type: string
+          enum:
+          - readable
+          - raw
+        expectedSwapTimeMs:
+          type: integer
+          minimum: 0
+        quoteCandidates:
+          type: array
+          items: {}
+          description: Debug records returned when requested.
     QuoteRequest:
       type: object
       required:
@@ -95,40 +132,3 @@ components:
           type: boolean
           default: true
           description: Include the winning route rows when true.
-    Quote:
-      type: object
-      properties:
-        quoteId:
-          type: string
-          description: Unique quote identifier
-        orderType:
-          type: string
-          enum:
-          - market_order
-        from:
-          type: string
-        to:
-          type: string
-        expiry:
-          type: string
-          format: date-time
-        estimatedOut:
-          type: string
-          description: Expected output amount
-        route:
-          type: array
-          items:
-            type: object
-          description: Hop-by-hop execution details.
-        amountFormat:
-          type: string
-          enum:
-          - readable
-          - raw
-        expectedSwapTimeMs:
-          type: integer
-          minimum: 0
-        quoteCandidates:
-          type: array
-          items: {}
-          description: Debug records returned when requested.
